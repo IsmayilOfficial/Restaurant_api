@@ -1,7 +1,8 @@
 package com.business.restaurant_api.controllers
 
 import com.business.restaurant_api.data.Meal
-import com.business.restaurant_api.repositories.mealRepository
+import com.business.restaurant_api.repositories.MealRepository
+
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -11,7 +12,7 @@ import java.util.*
 
 @RestController
 @RequestMapping("/meals")
-internal class mealController(private val mealRepository: mealRepository) {
+internal class mealController(private val mealRepository: MealRepository) {
     @get:GetMapping
     val meals: Iterable<Meal?>
         get() = mealRepository.findAll()
