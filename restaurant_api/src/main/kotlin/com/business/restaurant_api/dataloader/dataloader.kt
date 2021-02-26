@@ -11,6 +11,8 @@ import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.stereotype.Component
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.annotation.PostConstruct
 import javax.swing.text.html.parser.Entity
@@ -36,29 +38,39 @@ import javax.swing.text.html.parser.Entity
 
 @Configuration
 class BlogConfiguration {
+    var currentDateTime= LocalDateTime.now()
+    var datePatterned  = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
 
     @Bean
     fun databaseInitializer(restaurantRepository: RestaurantRepository,
                             mealRepository: MealRepository
     ) = ApplicationRunner {
 
-        val rest1 = restaurantRepository.save(Restaurants("kabab Stop "))
-        val rest2 = restaurantRepository.save(Restaurants("armudu"))
-        val rest3 = restaurantRepository.save(Restaurants("furkan kebab"))
-        mealRepository.save(Meal(
-            name = "lule",
 
-            cafe = rest1
+        val rest1 = restaurantRepository.save(Restaurants("kabab Stop ","Tartu",true,true))
+        val rest2 = restaurantRepository.save(Restaurants("armudu","Tartu",true,true))
+        val rest3 = restaurantRepository.save(Restaurants("furkan kebab","Tartu",true,true))
+        mealRepository.save(Meal(
+            "lule",
+
+12.3,
+            datePatterned,
+            rest1
         ))
         mealRepository.save(Meal(
-            name = "bozartma",
+          "bozartma",
+            23.0,
+            datePatterned,
 
-            cafe = rest3
+
+            rest3
         ))
 
         mealRepository.save(Meal(
             name = "pomidor yumurta",
 
+34.9,
+            datePatterned,
             cafe = rest2
         ))
     }

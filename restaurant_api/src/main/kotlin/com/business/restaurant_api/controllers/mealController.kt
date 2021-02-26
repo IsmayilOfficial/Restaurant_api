@@ -23,8 +23,8 @@ internal class mealController(private val mealRepository: MealRepository) {
     }
 
     @PostMapping
-    fun postMeal(@RequestBody coffee: Meal): Meal {
-        return mealRepository.save(coffee)
+    fun postMeal(@RequestBody meal: Meal): Meal {
+        return mealRepository.save(meal)
     }
 
     @PutMapping("/{id}")
